@@ -9,21 +9,24 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/FirebaseService */ "./src/services/FirebaseService.ts");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
-/* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
+/* harmony import */ var _services_PushService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/PushService */ "./src/services/PushService.ts");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
+/* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
 
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__.defineComponent)({
+
+/* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.defineComponent)({
   mounted: function mounted() {
-    var app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp(); //useStore(key).commit(SET_APP, app);
+    var app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp();
+    var push = new _services_PushService__WEBPACK_IMPORTED_MODULE_1__.PushService(); //useStore(key).commit(SET_APP, app);
 
-    (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)(_store__WEBPACK_IMPORTED_MODULE_1__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_2__.LISTEN_USER_AUTH);
+    (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)(_store__WEBPACK_IMPORTED_MODULE_2__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__.LISTEN_USER_AUTH);
   },
   methods: {//
   }
@@ -763,6 +766,72 @@ var FirebaseService = /*#__PURE__*/function () {
   }]);
 
   return FirebaseService;
+}();
+
+/***/ }),
+
+/***/ "./src/services/PushService.ts":
+/*!*************************************!*\
+  !*** ./src/services/PushService.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PushService": function() { return /* binding */ PushService; }
+/* harmony export */ });
+/* harmony import */ var _Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/createClass.js */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! regenerator-runtime/runtime.js */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var firebase_messaging__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/messaging */ "./node_modules/firebase/messaging/dist/index.esm.js");
+
+
+
+
+
+var PushService = /*#__PURE__*/function () {
+  function PushService() {
+    (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this, PushService);
+
+    this.messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)();
+  }
+
+  (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_2__["default"])(PushService, [{
+    key: "getToken",
+    value: function () {
+      var _getToken2 = (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)(this.messaging, {
+                  vapidKey: 'BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU'
+                });
+
+              case 2:
+                return _context.abrupt("return", _context.sent);
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getToken() {
+        return _getToken2.apply(this, arguments);
+      }
+
+      return getToken;
+    }()
+  }]);
+
+  return PushService;
 }();
 
 /***/ }),

@@ -9,21 +9,24 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/FirebaseService */ "./src/services/FirebaseService.ts");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
-/* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
+/* harmony import */ var _services_PushService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/PushService */ "./src/services/PushService.ts");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
+/* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
 
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__.defineComponent)({
+
+/* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.defineComponent)({
   mounted() {
-    const app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp(); //useStore(key).commit(SET_APP, app);
+    const app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp();
+    const push = new _services_PushService__WEBPACK_IMPORTED_MODULE_1__.PushService(); //useStore(key).commit(SET_APP, app);
 
-    (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)(_store__WEBPACK_IMPORTED_MODULE_1__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_2__.LISTEN_USER_AUTH);
+    (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)(_store__WEBPACK_IMPORTED_MODULE_2__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__.LISTEN_USER_AUTH);
   },
 
   methods: {//
@@ -570,6 +573,34 @@ class FirebaseService {
 
   static getApp() {
     return FirebaseService.getInstance().app;
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/services/PushService.ts":
+/*!*************************************!*\
+  !*** ./src/services/PushService.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PushService": function() { return /* binding */ PushService; }
+/* harmony export */ });
+/* harmony import */ var firebase_messaging__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/messaging */ "./node_modules/firebase/messaging/dist/index.esm.js");
+
+class PushService {
+  constructor() {
+    this.messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getMessaging)();
+  }
+
+  async getToken() {
+    return await (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getToken)(this.messaging, {
+      vapidKey: 'BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU'
+    });
   }
 
 }
