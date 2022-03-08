@@ -27,7 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_5__.defineComponent)({
   data: function data() {
     return {
-      publicPath: "/protezionecivile-public/"
+      publicPath: "/pcgl-dev/"
     };
   },
   methods: {

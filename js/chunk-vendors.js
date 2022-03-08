@@ -11482,7 +11482,7 @@ class WebSocketConnection {
                     options.headers['X-Firebase-AppCheck'] = this.appCheckToken;
                 }
                 // Plumb appropriate http_proxy environment variable into faye-websocket if it exists.
-                const env = ({"NODE_ENV":"deploydev","BASE_URL":"/protezionecivile-public/"});
+                const env = ({"NODE_ENV":"deploydev","BASE_URL":"/pcgl-dev/"});
                 const proxy = this.connURL.indexOf('wss://') === 0
                     ? env['HTTPS_PROXY'] || env['https_proxy']
                     : env['HTTP_PROXY'] || env['http_proxy'];
@@ -23152,7 +23152,7 @@ function repoManagerDatabaseFromApp(app, authProvider, appCheckProvider, url, no
     let isEmulator;
     let dbEmulatorHost = undefined;
     if (typeof process !== 'undefined') {
-        dbEmulatorHost = ({"NODE_ENV":"deploydev","BASE_URL":"/protezionecivile-public/"})[FIREBASE_DATABASE_EMULATOR_HOST_VAR];
+        dbEmulatorHost = ({"NODE_ENV":"deploydev","BASE_URL":"/pcgl-dev/"})[FIREBASE_DATABASE_EMULATOR_HOST_VAR];
     }
     if (dbEmulatorHost) {
         isEmulator = true;

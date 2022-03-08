@@ -2116,7 +2116,7 @@ if(false) {}
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	!function() {
-/******/ 		__webpack_require__.p = "/protezionecivile-public/";
+/******/ 		__webpack_require__.p = "/pcgl-dev/";
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
