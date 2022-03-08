@@ -1,3 +1,13 @@
+importScripts("https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js");
+importScripts(
+    "https://www.gstatic.com/firebasejs/7.16.1/firebase-messaging.js",
+);
+// For an optimal experience using Cloud Messaging, also add the Firebase SDK for Analytics.
+/* importScripts(
+    "https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js",
+); */
+
+
 import { getMessaging } from "firebase/messaging";
 import { onBackgroundMessage } from "firebase/messaging/sw";
 
@@ -15,14 +25,14 @@ initializeApp(firebaseConfig);
 
 const messaging = getMessaging();
 onBackgroundMessage(messaging, (payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // Customize notification here
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
-  };
+    console.log('[firebase-messaging-sw.js] Received background message ', payload);
+    // Customize notification here
+    const notificationTitle = 'Background Message Title';
+    const notificationOptions = {
+        body: 'Background Message body.',
+        icon: '/firebase-logo.png'
+    };
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
+    self.registration.showNotification(notificationTitle,
+        notificationOptions);
 });
