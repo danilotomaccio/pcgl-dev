@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.defineComponent)({
   mounted() {
     const app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp();
-    const push = new _services_PushService__WEBPACK_IMPORTED_MODULE_1__.PushService(); //useStore(key).commit(SET_APP, app);
+    const push = new _services_PushService__WEBPACK_IMPORTED_MODULE_1__.PushService().onMessage(payload => console.log(payload)); //useStore(key).commit(SET_APP, app);
 
     (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)(_store__WEBPACK_IMPORTED_MODULE_2__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__.LISTEN_USER_AUTH);
   },
@@ -597,10 +597,8 @@ class PushService {
     this.messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getMessaging)();
   }
 
-  async getToken() {
-    return await (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getToken)(this.messaging, {
-      vapidKey: 'BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU'
-    });
+  onMessage(callback) {
+    (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.onMessage)(this.messaging, callback);
   }
 
 }
