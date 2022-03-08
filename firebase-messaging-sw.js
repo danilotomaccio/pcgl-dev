@@ -17,6 +17,8 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const messaging = getMessaging();
+messaging.getToken({ vapidKey: "BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU" });
+
 onBackgroundMessage(messaging, (payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     // Customize notification here
