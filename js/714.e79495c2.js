@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkprotezione_civile"]=self["webpackChunkprotezione_civile"]||[]).push([[714],{7714:function(e,n,r){r.r(n),r.d(n,{default:function(){return d}});var i=r(6252);const t={id:"admin"},o=(0,i._)("h2",null,"Volere é potere",-1),u=[o];function c(e,n,r,o,c,a){return(0,i.wg)(),(0,i.iD)("div",t,u)}var a=(0,i.aZ)({}),l=r(3744);const s=(0,l.Z)(a,[["render",c]]);var d=s}}]);
-//# sourceMappingURL=714.e79495c2.js.map
