@@ -21,6 +21,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.defineComponent)({
+  data: function data() {
+    var instEv = {};
+    return {
+      instEv: instEv
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    window.addEventListener("beforeinstallprompt", function (ev) {
+      console.log(ev);
+      _this.instEv = ev;
+    });
+  },
   mounted: function mounted() {
     return (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -39,7 +53,11 @@ __webpack_require__.r(__webpack_exports__);
       }, _callee);
     }))();
   },
-  methods: {}
+  methods: {
+    showInstall: function showInstall() {
+      this.instEv.prompt();
+    }
+  }
 }));
 
 /***/ }),
@@ -202,7 +220,7 @@ __webpack_require__.r(__webpack_exports__);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
     default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
       var Component = _ref.Component,
           route = _ref.route;
@@ -223,7 +241,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  });
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = //@ts-ignore
+    function () {
+      return _ctx.showInstall && _ctx.showInstall.apply(_ctx, arguments);
+    })
+  }, "Button")], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),

@@ -16,13 +16,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.defineComponent)({
+  data() {
+    let instEv = {};
+    return {
+      instEv
+    };
+  },
+
+  created() {
+    window.addEventListener("beforeinstallprompt", ev => {
+      console.log(ev);
+      this.instEv = ev;
+    });
+  },
+
   async mounted() {
     // const app = FirebaseService.getApp();
     //useStore(key).commit(SET_APP, app);
     _store__WEBPACK_IMPORTED_MODULE_0__.store.dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_1__.LISTEN_USER_AUTH); // onMessage(this.$messaging, (payload) => console.log(payload));
   },
 
-  methods: {}
+  methods: {
+    showInstall() {
+      this.instEv.prompt();
+    }
+
+  }
 }));
 
 /***/ }),
@@ -167,7 +186,7 @@ __webpack_require__.r(__webpack_exports__);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
     default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(({
       Component,
       route
@@ -185,7 +204,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  });
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = //@ts-ignore
+    (...args) => _ctx.showInstall && _ctx.showInstall(...args))
+  }, "Button")], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
