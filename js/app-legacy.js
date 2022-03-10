@@ -435,8 +435,7 @@ var prod = {
 };
 
 function isDevEnv() {
-  console.log("preproduction", ({"NODE_ENV":"preproduction","BASE_URL":"/"}).DEV);
-  return  true || 0;
+  return "preproduction" !== 'production';
 }
 
 var firebaseConfig = isDevEnv() ? dev : prod;
