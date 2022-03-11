@@ -8,37 +8,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/FirebaseDBService */ "./src/services/FirebaseDBService.ts");
-/* harmony import */ var _services_ReportService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/services/ReportService */ "./src/services/ReportService.ts");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm-bundler.js");
 
-
-
-/* harmony default export */ __webpack_exports__["default"] = ((0,vue__WEBPACK_IMPORTED_MODULE_2__.defineComponent)({
-  components: {},
-  methods: {
-    async downloadCSV() {
-      const firebaseService = new _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_0__.FirebaseDBService();
-      const data = await firebaseService.readData("carReports");
-
-      if (data) {
-        const csvContent = new _services_ReportService__WEBPACK_IMPORTED_MODULE_1__.ReportService().reportsToCSV(data);
-        this.downloadFile("report.csv", csvContent);
-      }
-    },
-
-    downloadFile(fileName, content) {
-      const element = document.createElement("a");
-      element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(content));
-      element.setAttribute("download", fileName);
-      element.style.display = "none";
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    }
-
-  }
-}));
+/* harmony default export */ __webpack_exports__["default"] = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({}));
 
 /***/ }),
 
@@ -65,41 +37,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)]);
-}
-
-/***/ }),
-
-/***/ "./src/services/ReportService.ts":
-/*!***************************************!*\
-  !*** ./src/services/ReportService.ts ***!
-  \***************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ReportService": function() { return /* binding */ ReportService; }
-/* harmony export */ });
-class ReportService {
-  reportsToCSV(reports) {
-    const carReportFields = ["carId", "startTime", "stopTime", "startOdometer", "stopOdometer", "userId", "userName", "causal", "declarations"];
-    let res = "id" + carReportFields.reduce((p, f) => p += `,${f}`, "") + "\n";
-
-    for (const reportId in reports) {
-      res += `${reportId}`;
-      const rep = reports[reportId];
-
-      for (const field of carReportFields) {
-        const value = rep[field];
-        res += `,${value ? value : ""}`;
-      }
-
-      res += "\n";
-    }
-
-    return res;
-  }
-
 }
 
 /***/ }),

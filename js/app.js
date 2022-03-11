@@ -9,36 +9,32 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
-/* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/FirebaseService */ "./src/services/FirebaseService.ts");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
+/* harmony import */ var _store_modules_appState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/modules/appState */ "./src/store/modules/appState.ts");
+/* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.defineComponent)({
-  data() {
-    let instEv = {};
-    return {
-      instEv
-    };
-  },
 
+
+
+/* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.defineComponent)({
   created() {
     window.addEventListener("beforeinstallprompt", ev => {
-      console.log(ev);
-      this.instEv = ev;
+      this.$store.commit(_store_modules_appState__WEBPACK_IMPORTED_MODULE_2__.SET_INSTALL_EVENT, ev);
     });
+    const app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp();
+    (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)(_store__WEBPACK_IMPORTED_MODULE_1__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__.LISTEN_USER_AUTH);
   },
 
-  async mounted() {
-    // const app = FirebaseService.getApp();
-    //useStore(key).commit(SET_APP, app);
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_1__.LISTEN_USER_AUTH); // onMessage(this.$messaging, (payload) => console.log(payload));
+  methods: {//
   },
-
-  methods: {
-    showInstall() {
-      this.instEv.prompt();
+  computed: {
+    messages() {
+      return this.$store.state.messages.messages;
     }
 
   }
@@ -80,14 +76,21 @@ __webpack_require__.r(__webpack_exports__);
     logout() {
       (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signOut)((0,_firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)()); //TODO - Fare logout altrove?
 
-      this.$router.push('login');
+      this.$router.push("login");
+    },
+
+    installApp() {
+      if (this.installEv) {
+        this.installEv.prompt();
+      }
     }
 
   },
   computed: {
-    /* readableFont() {
-      return this.$store.state.settings.font === "Avenir";
-    }, */
+    installEv() {
+      return this.$store.state.appState.installEvent;
+    }
+
   }
 }));
 
@@ -183,10 +186,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm-bundler.js");
 
+const _hoisted_1 = {
+  key: 0,
+  id: "notification"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.messages.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.messages[_ctx.messages.length - 1]), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
     default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(({
       Component,
       route
@@ -204,10 +213,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = //@ts-ignore
-    (...args) => _ctx.showInstall && _ctx.showInstall(...args))
-  }, "Button")], 64
+  })], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -254,9 +260,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: "menu_btn",
     onClick: _cache[0] || (_cache[0] = $event => _ctx.showMenu = !_ctx.showMenu)
-  }, _hoisted_3), _ctx.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"option\">Resetta chat</div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_3), _ctx.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [_ctx.installEv ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
     class: "option",
     onClick: _cache[1] || (_cache[1] = //@ts-ignore
+    (...args) => _ctx.installApp && _ctx.installApp(...args))
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.install), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    class: "option",
+    onClick: _cache[2] || (_cache[2] = //@ts-ignore
     (...args) => _ctx.logout && _ctx.logout(...args))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.logout), 1
   /* TEXT */
@@ -387,7 +400,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "firebaseConfig": function() { return /* binding */ firebaseConfig; },
 /* harmony export */   "vapidKey": function() { return /* binding */ vapidKey; }
 /* harmony export */ });
-const dev = {
+/* export const firebaseConfig = {
+    apiKey: "AIzaSyC_5sSUzZkMofwuI4f6uF1CdKa5uBBzSU4",
+    authDomain: "pcgltricarico05.firebaseapp.com",
+    databaseURL: "https://pcgltricarico05-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "pcgltricarico05",
+    storageBucket: "pcgltricarico05.appspot.com",
+    messagingSenderId: "320152077505",
+    appId: "1:320152077505:web:f4c84686f061134a78c040",
+    measurementId: "G-7ZHL4J15XG"
+};
+export const vapidKey = "BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU"; */
+const firebaseConfig = {
   apiKey: "AIzaSyCGLXls0uwohW8UczwMuMPgY61QRCyjydA",
   authDomain: "soter-ia.firebaseapp.com",
   databaseURL: "https://soter-ia.firebaseio.com",
@@ -397,25 +421,7 @@ const dev = {
   appId: "1:712755300293:web:9c91cc4c98e2a36b77edac",
   measurementId: "G-6Y82RJ5Q37"
 };
-const prod = {
-  apiKey: "AIzaSyC_5sSUzZkMofwuI4f6uF1CdKa5uBBzSU4",
-  authDomain: "pcgltricarico05.firebaseapp.com",
-  databaseURL: "https://pcgltricarico05-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "pcgltricarico05",
-  storageBucket: "pcgltricarico05.appspot.com",
-  messagingSenderId: "320152077505",
-  appId: "1:320152077505:web:f4c84686f061134a78c040",
-  measurementId: "G-7ZHL4J15XG"
-};
-
-function isDevEnv() {
-  return "preproduction" !== 'production';
-}
-
-const firebaseConfig = isDevEnv() ? dev : prod;
-const vkDev = "BLz4hW8tcGGVq3HkDTlruyQO4mW-IfHrG_5cNdkfW8zFfTHAjSXaGIqb4jE63RIWhBsf-ob_7z2X5N6ItZ-phyM";
-const vkProd = "BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU";
-const vapidKey = isDevEnv() ? vkDev : vkProd;
+const vapidKey = "BLz4hW8tcGGVq3HkDTlruyQO4mW-IfHrG_5cNdkfW8zFfTHAjSXaGIqb4jE63RIWhBsf-ob_7z2X5N6ItZ-phyM";
 
 /***/ }),
 
@@ -447,7 +453,8 @@ const app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_App_vue__WEBPACK_IMP
 const t = _strings__WEBPACK_IMPORTED_MODULE_7__.strings;
 const messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getMessaging)();
 app.config.globalProperties.$t = t;
-app.config.globalProperties.$messaging = messaging;
+app.config.globalProperties.$store = _store__WEBPACK_IMPORTED_MODULE_6__.store; // TODO - Mi sa che non serve
+
 app.mount('#app');
 
 /***/ }),
@@ -462,8 +469,7 @@ app.mount('#app');
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var register_service_worker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! register-service-worker */ "./node_modules/register-service-worker/index.js");
 /* eslint-disable no-console */
- //if (process.env.NODE_ENV === 'production') {
-//register(`${process.env.BASE_URL}firebase-messaging-sw.js`, {
+ // if (process.env.NODE_ENV === 'production') {
 
 (0,register_service_worker__WEBPACK_IMPORTED_MODULE_0__.register)(`${"/"}service-worker.js`, {
   ready() {
@@ -494,7 +500,7 @@ __webpack_require__.r(__webpack_exports__);
     console.error('Error during service worker registration:', error);
   }
 
-}); //}
+}); // }
 
 /***/ }),
 
@@ -556,7 +562,7 @@ const routes = [{
     }
   }, {
     path: 'notifications',
-    component: () => __webpack_require__.e(/*! import() */ "src_views_Notifications_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Notifications.vue */ "./src/views/Notifications.vue")),
+    component: () => __webpack_require__.e(/*! import() */ "src_views_AdminNotifications_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/AdminNotifications.vue */ "./src/views/AdminNotifications.vue")),
     meta: {
       transition: 'expand-card',
       requireLogin: true
@@ -662,8 +668,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class FirebaseService {
   constructor() {
-    this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp)(_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__.firebaseConfig); // useStore(key).commit(SET_APP, app);
-
+    this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp)(_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__.firebaseConfig);
     (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)();
   }
 
@@ -710,7 +715,6 @@ class UserService {
     const updates = {
       [`/users/${userUid}/notificationTokens/${token}`]: true
     };
-    console.log(updates);
 
     try {
       await this.db.updateValues(updates);
@@ -753,17 +757,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "key": function() { return /* binding */ key; },
 /* harmony export */   "store": function() { return /* binding */ store; }
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _modules_appState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/appState */ "./src/store/modules/appState.ts");
 /* harmony import */ var _modules_firebaseModule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
+/* harmony import */ var _modules_messagesModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/messagesModule */ "./src/store/modules/messagesModule.ts");
+
 
 
 
 const key = Symbol();
-const store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
+const store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
   modules: {
     firebase: _modules_firebaseModule__WEBPACK_IMPORTED_MODULE_1__.firebaseModule,
-    appState: _modules_appState__WEBPACK_IMPORTED_MODULE_0__.appStateModule
+    appState: _modules_appState__WEBPACK_IMPORTED_MODULE_0__.appStateModule,
+    messages: _modules_messagesModule__WEBPACK_IMPORTED_MODULE_2__.messagesModule
   }
 });
 
@@ -780,17 +787,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LISTEN_CARS": function() { return /* binding */ LISTEN_CARS; },
 /* harmony export */   "LISTEN_USER": function() { return /* binding */ LISTEN_USER; },
+/* harmony export */   "SET_INSTALL_EVENT": function() { return /* binding */ SET_INSTALL_EVENT; },
 /* harmony export */   "appStateModule": function() { return /* binding */ appStateModule; }
 /* harmony export */ });
 /* harmony import */ var _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/FirebaseDBService */ "./src/services/FirebaseDBService.ts");
 /* harmony import */ var _services_UserService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/services/UserService */ "./src/services/UserService.ts");
+/* harmony import */ var _messagesModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messagesModule */ "./src/store/modules/messagesModule.ts");
+
 
 
 const firebase = new _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_0__.FirebaseDBService();
 const appStateModule = {
   state: {
     cars: null,
-    user: null
+    user: null,
+    installEvent: null
   },
   mutations: {
     updateCars(state, cars) {
@@ -800,6 +811,10 @@ const appStateModule = {
     updateUser(state, user) {
       state.user = { ...user
       };
+    },
+
+    setInstallEvent(state, installEvent) {
+      state.installEvent = installEvent;
     }
 
   },
@@ -811,7 +826,8 @@ const appStateModule = {
     },
     listenUser: async ({
       commit,
-      rootState
+      rootState,
+      dispatch
     }) => {
       const user = await firebase.readData(`users/${rootState.firebase.user?.uid}`);
 
@@ -819,17 +835,16 @@ const appStateModule = {
         commit('updateUser', user);
         const userService = new _services_UserService__WEBPACK_IMPORTED_MODULE_1__.UserService();
         const currentToken = await userService.getMessagingToken();
+        dispatch(_messagesModule__WEBPACK_IMPORTED_MODULE_2__.LISTEN_MESSAGES);
 
         if (currentToken && !(user.notificationTokens && Object.keys(user.notificationTokens).includes(currentToken))) {
           const uid = rootState.firebase.user?.uid;
 
           if (uid) {
-            await new _services_UserService__WEBPACK_IMPORTED_MODULE_1__.UserService().saveNoticationToken(currentToken, uid);
+            await userService.saveNoticationToken(currentToken, uid);
           }
         }
       }
-
-      firebase.listenForChanges(`users/${rootState.firebase.user?.uid}`, user => commit('updateUser', user));
     }
   },
   getters: {
@@ -864,7 +879,8 @@ const appStateModule = {
   }
 };
 const LISTEN_CARS = 'listenCars',
-      LISTEN_USER = 'listenUser';
+      LISTEN_USER = 'listenUser',
+      SET_INSTALL_EVENT = 'setInstallEvent';
 
 /***/ }),
 
@@ -922,6 +938,46 @@ const firebaseModule = {
 const SET_APP = 'setApp',
       SET_USER = 'setUser',
       LISTEN_USER_AUTH = 'listenUserAuth';
+
+/***/ }),
+
+/***/ "./src/store/modules/messagesModule.ts":
+/*!*********************************************!*\
+  !*** ./src/store/modules/messagesModule.ts ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LISTEN_MESSAGES": function() { return /* binding */ LISTEN_MESSAGES; },
+/* harmony export */   "messagesModule": function() { return /* binding */ messagesModule; }
+/* harmony export */ });
+/* harmony import */ var firebase_messaging__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/messaging */ "./node_modules/firebase/messaging/dist/index.esm.js");
+
+const messagesModule = {
+  state: {
+    messages: []
+  },
+  mutations: {
+    addMessage(state, message) {
+      state.messages.push(message);
+    }
+
+  },
+  actions: {
+    listenMessages: async ({
+      commit
+    }) => {
+      (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.onMessage)((0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getMessaging)(), m => {
+        console.log(m);
+        commit('addMessage', m);
+      });
+    }
+  },
+  getters: {}
+};
+const LISTEN_MESSAGES = 'listenMessages';
 
 /***/ }),
 
@@ -1010,7 +1066,9 @@ const strings = {
   loginTitle: "Protezione civile gruppo lucano Tricarico",
   loginWithGoogle: "Accedi con Google",
   logout: "Effettua logout",
-  notificationDesc: "Invia una notifica ad un gruppo di iscritti"
+  install: "Installa app",
+  notificationDesc: "Invia una notifica ad un gruppo di iscritti",
+  goToAdminPush: "Invia notifica"
 };
 
 /***/ }),

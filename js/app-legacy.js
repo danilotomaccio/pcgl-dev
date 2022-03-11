@@ -9,53 +9,33 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime.js */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/FirebaseService */ "./src/services/FirebaseService.ts");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
+/* harmony import */ var _store_modules_appState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/modules/appState */ "./src/store/modules/appState.ts");
 /* harmony import */ var _store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
 
 
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ((0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.defineComponent)({
-  data: function data() {
-    var instEv = {};
-    return {
-      instEv: instEv
-    };
-  },
   created: function created() {
     var _this = this;
 
     window.addEventListener("beforeinstallprompt", function (ev) {
-      console.log(ev);
-      _this.instEv = ev;
+      _this.$store.commit(_store_modules_appState__WEBPACK_IMPORTED_MODULE_2__.SET_INSTALL_EVENT, ev);
     });
+    var app = _services_FirebaseService__WEBPACK_IMPORTED_MODULE_0__.FirebaseService.getApp();
+    (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)(_store__WEBPACK_IMPORTED_MODULE_1__.key).dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__.LISTEN_USER_AUTH);
   },
-  mounted: function mounted() {
-    return (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              // const app = FirebaseService.getApp();
-              //useStore(key).commit(SET_APP, app);
-              _store__WEBPACK_IMPORTED_MODULE_2__.store.dispatch(_store_modules_firebaseModule__WEBPACK_IMPORTED_MODULE_3__.LISTEN_USER_AUTH); // onMessage(this.$messaging, (payload) => console.log(payload));
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+  methods: {//
   },
-  methods: {
-    showInstall: function showInstall() {
-      this.instEv.prompt();
+  computed: {
+    messages: function messages() {
+      return this.$store.state.messages.messages;
     }
   }
 }));
@@ -94,13 +74,18 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signOut)((0,_firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)()); //TODO - Fare logout altrove?
 
-      this.$router.push('login');
+      this.$router.push("login");
+    },
+    installApp: function installApp() {
+      if (this.installEv) {
+        this.installEv.prompt();
+      }
     }
   },
   computed: {
-    /* readableFont() {
-      return this.$store.state.settings.font === "Avenir";
-    }, */
+    installEv: function installEv() {
+      return this.$store.state.appState.installEvent;
+    }
   }
 }));
 
@@ -217,10 +202,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm-bundler.js");
 
+var _hoisted_1 = {
+  key: 0,
+  id: "notification"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.messages.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.messages[_ctx.messages.length - 1]), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
     default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
       var Component = _ref.Component,
           route = _ref.route;
@@ -241,12 +232,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = //@ts-ignore
-    function () {
-      return _ctx.showInstall && _ctx.showInstall.apply(_ctx, arguments);
-    })
-  }, "Button")], 64
+  })], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -299,9 +285,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.showMenu = !_ctx.showMenu;
     })
-  }, _hoisted_3), _ctx.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"option\">Resetta chat</div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_3), _ctx.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [_ctx.installEv ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
     class: "option",
     onClick: _cache[1] || (_cache[1] = //@ts-ignore
+    function () {
+      return _ctx.installApp && _ctx.installApp.apply(_ctx, arguments);
+    })
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.install), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    class: "option",
+    onClick: _cache[2] || (_cache[2] = //@ts-ignore
     function () {
       return _ctx.logout && _ctx.logout.apply(_ctx, arguments);
     })
@@ -438,7 +433,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "firebaseConfig": function() { return /* binding */ firebaseConfig; },
 /* harmony export */   "vapidKey": function() { return /* binding */ vapidKey; }
 /* harmony export */ });
-var dev = {
+/* export const firebaseConfig = {
+    apiKey: "AIzaSyC_5sSUzZkMofwuI4f6uF1CdKa5uBBzSU4",
+    authDomain: "pcgltricarico05.firebaseapp.com",
+    databaseURL: "https://pcgltricarico05-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "pcgltricarico05",
+    storageBucket: "pcgltricarico05.appspot.com",
+    messagingSenderId: "320152077505",
+    appId: "1:320152077505:web:f4c84686f061134a78c040",
+    measurementId: "G-7ZHL4J15XG"
+};
+export const vapidKey = "BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU"; */
+var firebaseConfig = {
   apiKey: "AIzaSyCGLXls0uwohW8UczwMuMPgY61QRCyjydA",
   authDomain: "soter-ia.firebaseapp.com",
   databaseURL: "https://soter-ia.firebaseio.com",
@@ -448,25 +454,7 @@ var dev = {
   appId: "1:712755300293:web:9c91cc4c98e2a36b77edac",
   measurementId: "G-6Y82RJ5Q37"
 };
-var prod = {
-  apiKey: "AIzaSyC_5sSUzZkMofwuI4f6uF1CdKa5uBBzSU4",
-  authDomain: "pcgltricarico05.firebaseapp.com",
-  databaseURL: "https://pcgltricarico05-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "pcgltricarico05",
-  storageBucket: "pcgltricarico05.appspot.com",
-  messagingSenderId: "320152077505",
-  appId: "1:320152077505:web:f4c84686f061134a78c040",
-  measurementId: "G-7ZHL4J15XG"
-};
-
-function isDevEnv() {
-  return "preproduction" !== 'production';
-}
-
-var firebaseConfig = isDevEnv() ? dev : prod;
-var vkDev = "BLz4hW8tcGGVq3HkDTlruyQO4mW-IfHrG_5cNdkfW8zFfTHAjSXaGIqb4jE63RIWhBsf-ob_7z2X5N6ItZ-phyM";
-var vkProd = "BOZDAwlyoFZqyXvJvmwtGxv3kYLHPRSdXa3V0va9tNN_2fjo5jk3FF6y8Muf2hJFtZlsypbCwmkL2W7NX9L4GkU";
-var vapidKey = isDevEnv() ? vkDev : vkProd;
+var vapidKey = "BLz4hW8tcGGVq3HkDTlruyQO4mW-IfHrG_5cNdkfW8zFfTHAjSXaGIqb4jE63RIWhBsf-ob_7z2X5N6ItZ-phyM";
 
 /***/ }),
 
@@ -510,7 +498,8 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_5__.createApp)(_App_vue__WEBPACK_IMPOR
 var t = _strings__WEBPACK_IMPORTED_MODULE_11__.strings;
 var messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)();
 app.config.globalProperties.$t = t;
-app.config.globalProperties.$messaging = messaging;
+app.config.globalProperties.$store = _store__WEBPACK_IMPORTED_MODULE_10__.store; // TODO - Mi sa che non serve
+
 app.mount('#app');
 
 /***/ }),
@@ -525,8 +514,7 @@ app.mount('#app');
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var register_service_worker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! register-service-worker */ "./node_modules/register-service-worker/index.js");
 /* eslint-disable no-console */
- //if (process.env.NODE_ENV === 'production') {
-//register(`${process.env.BASE_URL}firebase-messaging-sw.js`, {
+ // if (process.env.NODE_ENV === 'production') {
 
 (0,register_service_worker__WEBPACK_IMPORTED_MODULE_0__.register)("".concat("/", "service-worker.js"), {
   ready: function ready() {
@@ -550,7 +538,7 @@ __webpack_require__.r(__webpack_exports__);
   error: function error(_error) {
     console.error('Error during service worker registration:', _error);
   }
-}); //}
+}); // }
 
 /***/ }),
 
@@ -614,7 +602,7 @@ var routes = [{
   path: '/admin',
   name: 'Admin',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e("node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper_js"), __webpack_require__.e("src_views_Admin_vue")]).then(__webpack_require__.bind(__webpack_require__, /*! ../views/Admin.vue */ "./src/views/Admin.vue"));
+    return __webpack_require__.e(/*! import() */ "src_views_Admin_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Admin.vue */ "./src/views/Admin.vue"));
   },
   meta: {
     transition: 'expand-card',
@@ -632,7 +620,7 @@ var routes = [{
   }, {
     path: 'notifications',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "src_views_Notifications_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Notifications.vue */ "./src/views/Notifications.vue"));
+      return __webpack_require__.e(/*! import() */ "src_views_AdminNotifications_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/AdminNotifications.vue */ "./src/views/AdminNotifications.vue"));
     },
     meta: {
       transition: 'expand-card',
@@ -862,8 +850,7 @@ var FirebaseService = /*#__PURE__*/function () {
   function FirebaseService() {
     (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_0__["default"])(this, FirebaseService);
 
-    this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_3__.initializeApp)(_firebaseConfig__WEBPACK_IMPORTED_MODULE_2__.firebaseConfig); // useStore(key).commit(SET_APP, app);
-
+    this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_3__.initializeApp)(_firebaseConfig__WEBPACK_IMPORTED_MODULE_2__.firebaseConfig);
     (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.getAuth)();
   }
 
@@ -937,26 +924,25 @@ var UserService = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 updates = (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_defineProperty_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, "/users/".concat(userUid, "/notificationTokens/").concat(token), true);
-                console.log(updates);
-                _context.prev = 2;
-                _context.next = 5;
+                _context.prev = 1;
+                _context.next = 4;
                 return this.db.updateValues(updates);
 
-              case 5:
-                _context.next = 10;
+              case 4:
+                _context.next = 9;
                 break;
 
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](2);
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](1);
                 console.error(_context.t0);
 
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[2, 7]]);
+        }, _callee, this, [[1, 6]]);
       }));
 
       function saveNoticationToken(_x, _x2) {
@@ -1043,9 +1029,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _modules_appState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/appState */ "./src/store/modules/appState.ts");
 /* harmony import */ var _modules_firebaseModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/firebaseModule */ "./src/store/modules/firebaseModule.ts");
+/* harmony import */ var _modules_messagesModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/messagesModule */ "./src/store/modules/messagesModule.ts");
+
 
 
 
@@ -1053,10 +1041,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var key = Symbol();
-var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
+var store = (0,vuex__WEBPACK_IMPORTED_MODULE_6__.createStore)({
   modules: {
     firebase: _modules_firebaseModule__WEBPACK_IMPORTED_MODULE_4__.firebaseModule,
-    appState: _modules_appState__WEBPACK_IMPORTED_MODULE_3__.appStateModule
+    appState: _modules_appState__WEBPACK_IMPORTED_MODULE_3__.appStateModule,
+    messages: _modules_messagesModule__WEBPACK_IMPORTED_MODULE_5__.messagesModule
   }
 });
 
@@ -1073,6 +1062,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LISTEN_CARS": function() { return /* binding */ LISTEN_CARS; },
 /* harmony export */   "LISTEN_USER": function() { return /* binding */ LISTEN_USER; },
+/* harmony export */   "SET_INSTALL_EVENT": function() { return /* binding */ SET_INSTALL_EVENT; },
 /* harmony export */   "appStateModule": function() { return /* binding */ appStateModule; }
 /* harmony export */ });
 /* harmony import */ var _Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
@@ -1093,6 +1083,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/services/FirebaseDBService */ "./src/services/FirebaseDBService.ts");
 /* harmony import */ var _services_UserService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/services/UserService */ "./src/services/UserService.ts");
+/* harmony import */ var _messagesModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./messagesModule */ "./src/store/modules/messagesModule.ts");
+
 
 
 
@@ -1108,7 +1100,8 @@ var firebase = new _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_9__.Fire
 var appStateModule = {
   state: {
     cars: null,
-    user: null
+    user: null,
+    installEvent: null
   },
   mutations: {
     updateCars: function updateCars(state, cars) {
@@ -1116,6 +1109,9 @@ var appStateModule = {
     },
     updateUser: function updateUser(state, user) {
       state.user = (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, user);
+    },
+    setInstallEvent: function setInstallEvent(state, installEvent) {
+      state.installEvent = installEvent;
     }
   },
   actions: {
@@ -1127,15 +1123,15 @@ var appStateModule = {
     },
     listenUser: function () {
       var _listenUser = (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref2) {
-        var _rootState$firebase$u, _rootState$firebase$u3;
+        var _rootState$firebase$u;
 
-        var commit, rootState, user, userService, currentToken, _rootState$firebase$u2, uid;
+        var commit, rootState, dispatch, user, userService, currentToken, _rootState$firebase$u2, uid;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref2.commit, rootState = _ref2.rootState;
+                commit = _ref2.commit, rootState = _ref2.rootState, dispatch = _ref2.dispatch;
                 _context.next = 3;
                 return firebase.readData("users/".concat((_rootState$firebase$u = rootState.firebase.user) === null || _rootState$firebase$u === void 0 ? void 0 : _rootState$firebase$u.uid));
 
@@ -1143,7 +1139,7 @@ var appStateModule = {
                 user = _context.sent;
 
                 if (!user) {
-                  _context.next = 15;
+                  _context.next = 16;
                   break;
                 }
 
@@ -1154,26 +1150,22 @@ var appStateModule = {
 
               case 9:
                 currentToken = _context.sent;
+                dispatch(_messagesModule__WEBPACK_IMPORTED_MODULE_11__.LISTEN_MESSAGES);
 
                 if (!(currentToken && !(user.notificationTokens && Object.keys(user.notificationTokens).includes(currentToken)))) {
-                  _context.next = 15;
+                  _context.next = 16;
                   break;
                 }
 
                 uid = (_rootState$firebase$u2 = rootState.firebase.user) === null || _rootState$firebase$u2 === void 0 ? void 0 : _rootState$firebase$u2.uid;
 
                 if (!uid) {
-                  _context.next = 15;
+                  _context.next = 16;
                   break;
                 }
 
-                _context.next = 15;
-                return new _services_UserService__WEBPACK_IMPORTED_MODULE_10__.UserService().saveNoticationToken(currentToken, uid);
-
-              case 15:
-                firebase.listenForChanges("users/".concat((_rootState$firebase$u3 = rootState.firebase.user) === null || _rootState$firebase$u3 === void 0 ? void 0 : _rootState$firebase$u3.uid), function (user) {
-                  return commit('updateUser', user);
-                });
+                _context.next = 16;
+                return userService.saveNoticationToken(currentToken, uid);
 
               case 16:
               case "end":
@@ -1230,7 +1222,8 @@ var appStateModule = {
   }
 };
 var LISTEN_CARS = 'listenCars',
-    LISTEN_USER = 'listenUser';
+    LISTEN_USER = 'listenUser',
+    SET_INSTALL_EVENT = 'setInstallEvent';
 
 /***/ }),
 
@@ -1286,6 +1279,69 @@ var firebaseModule = {
 var SET_APP = 'setApp',
     SET_USER = 'setUser',
     LISTEN_USER_AUTH = 'listenUserAuth';
+
+/***/ }),
+
+/***/ "./src/store/modules/messagesModule.ts":
+/*!*********************************************!*\
+  !*** ./src/store/modules/messagesModule.ts ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LISTEN_MESSAGES": function() { return /* binding */ LISTEN_MESSAGES; },
+/* harmony export */   "messagesModule": function() { return /* binding */ messagesModule; }
+/* harmony export */ });
+/* harmony import */ var _Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime.js */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var firebase_messaging__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/messaging */ "./node_modules/firebase/messaging/dist/index.esm.js");
+
+
+
+var messagesModule = {
+  state: {
+    messages: []
+  },
+  mutations: {
+    addMessage: function addMessage(state, message) {
+      state.messages.push(message);
+    }
+  },
+  actions: {
+    listenMessages: function () {
+      var _listenMessages = (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
+        var commit;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_2__.onMessage)((0,firebase_messaging__WEBPACK_IMPORTED_MODULE_2__.getMessaging)(), function (m) {
+                  console.log(m);
+                  commit('addMessage', m);
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function listenMessages(_x) {
+        return _listenMessages.apply(this, arguments);
+      }
+
+      return listenMessages;
+    }()
+  },
+  getters: {}
+};
+var LISTEN_MESSAGES = 'listenMessages';
 
 /***/ }),
 
@@ -1390,7 +1446,9 @@ var strings = {
   loginTitle: "Protezione civile gruppo lucano Tricarico",
   loginWithGoogle: "Accedi con Google",
   logout: "Effettua logout",
-  notificationDesc: "Invia una notifica ad un gruppo di iscritti"
+  install: "Installa app",
+  notificationDesc: "Invia una notifica ad un gruppo di iscritti",
+  goToAdminPush: "Invia notifica"
 };
 
 /***/ }),

@@ -1,16 +1,15 @@
-
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCGLXls0uwohW8UczwMuMPgY61QRCyjydA",
-  authDomain: "soter-ia.firebaseapp.com",
-  databaseURL: "https://soter-ia.firebaseio.com",
-  projectId: "soter-ia",
-  storageBucket: "soter-ia.appspot.com",
-  messagingSenderId: "712755300293",
-  appId: "1:712755300293:web:9c91cc4c98e2a36b77edac",
-  measurementId: "G-6Y82RJ5Q37",
+    apiKey: "AIzaSyCGLXls0uwohW8UczwMuMPgY61QRCyjydA",
+    authDomain: "soter-ia.firebaseapp.com",
+    databaseURL: "https://soter-ia.firebaseio.com",
+    projectId: "soter-ia",
+    storageBucket: "soter-ia.appspot.com",
+    messagingSenderId: "712755300293",
+    appId: "1:712755300293:web:9c91cc4c98e2a36b77edac",
+    measurementId: "G-6Y82RJ5Q37",
 };
 /* 
 const firebaseConfig = {
@@ -32,10 +31,10 @@ messaging.onBackgroundMessage(messaging, (payload) => {
     // Customize notification here
     const notificationTitle = 'Background Message Title';
     const notificationOptions = {
-      body: 'Background Message body.',
-      icon: '/img/icons/android-chrome-192x192.png'
+        body: 'Background Message body.',
+        icon: '/img/icons/android-chrome-192x192.png'
     };
-  
+
     self.registration.showNotification(notificationTitle,
-      notificationOptions);
-  });
+        notificationOptions);
+});
