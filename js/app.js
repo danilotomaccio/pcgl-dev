@@ -28,6 +28,13 @@ __webpack_require__.r(__webpack_exports__);
     Notification: _components_Notification_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
 
+  data() {
+    let message = null;
+    return {
+      message
+    };
+  },
+
   created() {
     window.addEventListener("beforeinstallprompt", ev => {
       this.$store.commit(_store_modules_appState__WEBPACK_IMPORTED_MODULE_2__.SET_INSTALL_EVENT, ev);
@@ -38,9 +45,18 @@ __webpack_require__.r(__webpack_exports__);
 
   methods: {//
   },
-  computed: {
+
+  /* computed: {
     messages() {
       return this.$store.state.messages.messages;
+    },
+  }, */
+  watch: {
+    "$store.state.messages.lastMessage"(nv) {
+      this.message = nv;
+      setTimeout(() => {
+        this.message = null;
+      }, 10000);
     }
 
   }
@@ -64,7 +80,20 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     }
+  },
+
+  data() {
+    return {
+      dismiss: false
+    };
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.dismiss = true;
+    }, 10000);
   }
+
 }));
 
 /***/ }),
@@ -218,9 +247,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   const _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.messages.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Notification, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Notification, {
     key: 0,
-    message: _ctx.messages[_ctx.messages.lenght - 1]
+    message: _ctx.message
   }, null, 8
   /* PROPS */
   , ["message"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, null, {
@@ -267,10 +296,20 @@ const _withScopeId = n => ((0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("dat
 const _hoisted_1 = {
   id: "notification"
 };
+const _hoisted_2 = {
+  class: "title"
+};
+const _hoisted_3 = {
+  class: "body"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message.notification.title), 1
   /* TEXT */
-  );
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message.notification.body), 1
+  /* TEXT */
+  )], 512
+  /* NEED_PATCH */
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.dismiss]]);
 }
 
 /***/ }),
@@ -1019,11 +1058,16 @@ __webpack_require__.r(__webpack_exports__);
 
 const messagesModule = {
   state: {
-    messages: []
+    messages: [],
+    lastMessage: null
   },
   mutations: {
     addMessage(state, message) {
       state.messages.push(message);
+    },
+
+    updateLastMessage(state, message) {
+      state.lastMessage = message;
     }
 
   },
@@ -1034,6 +1078,7 @@ const messagesModule = {
       (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.onMessage)((0,firebase_messaging__WEBPACK_IMPORTED_MODULE_0__.getMessaging)(), m => {
         console.log(m);
         commit('addMessage', m);
+        commit('updateLastMessage', m);
       });
     }
   },
@@ -1542,7 +1587,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#notification[data-v-9084a0ca] {\n  position: absolute;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#notification[data-v-9084a0ca] {\n  position: absolute;\n  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n  z-index: 4;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n  margin: 4px;\n  top: 0;\n  left: 0;\n  right: 0;\n  text-align: start;\n}\n#notification .title[data-v-9084a0ca] {\n  font-weight: 700;\n}\n#notification .body[data-v-9084a0ca] {\n  font-weight: 400;\n}\n@media screen and (min-width: 600px) {\n#notification[data-v-9084a0ca] {\n    bottom: 0;\n    top: auto;\n    right: auto;\n    margin: 24px;\n    background-color: #0047bb;\n    color: #f0fbff;\n}\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

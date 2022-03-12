@@ -326,27 +326,6 @@ var NotificationService = /*#__PURE__*/function () {
 
       return addToTopic;
     }()
-  }, {
-    key: "getTopics",
-    value: function () {
-      var _getTopics = (0,_Users_TomaccioD_Documents_other_protezione_civile_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }));
-
-      function getTopics() {
-        return _getTopics.apply(this, arguments);
-      }
-
-      return getTopics;
-    }()
   }]);
 
   return NotificationService;

@@ -281,9 +281,6 @@ class NotificationService {
     return await res.json();
   }
 
-  async getTopics() {//
-  }
-
 }
 
 /***/ }),

@@ -40,7 +40,11 @@ __webpack_require__.r(__webpack_exports__);
               body: this.message.description,
               icon: "https://app.protezioneciviletricarico.com/img/icons/android-chrome-192x192.png",
               color: "#7e55c3",
-              badge: "https://app.protezioneciviletricarico.com/img/icons/android-chrome-192x192.png"
+              badge: "https://app.protezioneciviletricarico.com/img/icons/android-chrome-192x192.png",
+              actions: [{
+                action: "goTo",
+                title: "Prova"
+              }]
             }
           }
         };
@@ -255,9 +259,6 @@ class NotificationService {
     };
     const res = await fetch("https://unruffled-liskov-633292.netlify.app/.netlify/functions/addToTopic", requestOptions);
     return await res.json();
-  }
-
-  async getTopics() {//
   }
 
 }
