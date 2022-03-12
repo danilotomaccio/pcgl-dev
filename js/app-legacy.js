@@ -28,15 +28,7 @@ __webpack_require__.r(__webpack_exports__);
     Notification: _components_Notification_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
-    var message = {
-      from: "712755300293",
-      messageId: "c8c49a3d-d48e-405c-8410-8f0f073085c9",
-      notification: {
-        title: "asdasd",
-        body: "dsadsa"
-      }
-    }; //let message: MessagePayload | any = null;
-
+    var message = null;
     return {
       message: message
     };

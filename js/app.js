@@ -29,15 +29,7 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   data() {
-    let message = {
-      from: "712755300293",
-      messageId: "c8c49a3d-d48e-405c-8410-8f0f073085c9",
-      notification: {
-        title: "asdasd",
-        body: "dsadsa"
-      }
-    }; //let message: MessagePayload | any = null;
-
+    let message = null;
     return {
       message
     };
