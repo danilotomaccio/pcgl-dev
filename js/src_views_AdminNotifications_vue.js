@@ -31,9 +31,9 @@ __webpack_require__.r(__webpack_exports__);
 
   methods: {
     async sendPushNotification() {
-      if (this.message.topic && this.message.title && this.message.description) {
+      if (this.selectedTopic && this.message.title && this.message.description) {
         const msg = {
-          topic: this.message.topic,
+          topic: this.selectedTopic,
           webpush: {
             notification: {
               title: this.message.title,
