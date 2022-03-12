@@ -56,7 +56,8 @@ __webpack_require__.r(__webpack_exports__);
       roles: roles,
       selectedUsers: selectedUsers,
       // selectedRoles,
-      selectedRole: selectedRole
+      selectedRole: selectedRole,
+      loading: false
     };
   },
   mounted: function mounted() {
@@ -89,6 +90,9 @@ __webpack_require__.r(__webpack_exports__);
     }))();
   },
   methods: {
+    hasMandatoryFields: function hasMandatoryFields() {
+      return this.selectedUsers.length > 0 && this.topic !== "";
+    },
     createTopic: function createTopic() {
       var _this2 = this;
 
@@ -103,24 +107,23 @@ __webpack_require__.r(__webpack_exports__);
                 }).flatMap(function (u) {
                   return Object.keys(u.notificationTokens ? u.notificationTokens : {});
                 });
-                console.log(tokens);
 
                 if (!(_this2.topic !== "" && tokens.length > 0)) {
-                  _context2.next = 8;
+                  _context2.next = 7;
                   break;
                 }
 
-                _context2.next = 5;
+                _context2.next = 4;
                 return new _services_NotificationService__WEBPACK_IMPORTED_MODULE_11__.NotificationService().addToTopic(tokens, _this2.topic);
 
-              case 5:
-                _context2.next = 7;
+              case 4:
+                _context2.next = 6;
                 return new _services_AdminService__WEBPACK_IMPORTED_MODULE_12__.AdminService().saveTopic(_this2.topic, tokens);
 
-              case 7:
+              case 6:
                 _this2.$router.back();
 
-              case 8:
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -205,6 +208,7 @@ var _hoisted_7 = ["selected", "onClick"];
 var _hoisted_8 = {
   class: "desc"
 };
+var _hoisted_9 = ["disabled", "loading"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -252,10 +256,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = //@ts-ignore
     function () {
       return _ctx.createTopic && _ctx.createTopic.apply(_ctx, arguments);
-    })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_2__.toDisplayString)(_ctx.$t.newTopic), 1
-  /* TEXT */
-  )]);
+    }),
+    disabled: !_ctx.hasMandatoryFields(),
+    loading: _ctx.loading
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_2__.toDisplayString)(_ctx.$t.newTopic), 9
+  /* TEXT, PROPS */
+  , _hoisted_9)]);
 }
 
 /***/ }),
@@ -358,7 +364,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#new_topic[data-v-5d3e7a29] {\n  display: flex;\n  flex-direction: column;\n}\n#new_topic .desc[data-v-5d3e7a29] {\n  margin: 4px;\n  font-weight: 500;\n  align-self: flex-start;\n}\n#new_topic .divider[data-v-5d3e7a29] {\n  border-top: 1px #929292 solid;\n  margin: 12px 8px;\n}\n#new_topic .input[data-v-5d3e7a29] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  -webkit-appearance: none;\n  outline: none;\n}\n#new_topic .submit_button[data-v-5d3e7a29] {\n  text-align: center;\n  margin: 26px auto;\n  background-color: #0047bb;\n  color: #f0fbff;\n  font-weight: 500;\n  padding: 12px 24px;\n  border-radius: 8px;\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  cursor: pointer;\n  /* &[disabled=\"true\"] {\n    pointer-events: none;\n    opacity: 0.4;\n  } */\n}\n#new_topic .users_list[data-v-5d3e7a29],\n#new_topic .roles_list[data-v-5d3e7a29] {\n  display: flex;\n  flex-wrap: wrap;\n}\n#new_topic .users_list .toggable[data-v-5d3e7a29],\n#new_topic .roles_list .toggable[data-v-5d3e7a29] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  cursor: pointer;\n}\n#new_topic .users_list .toggable[selected=true][data-v-5d3e7a29],\n#new_topic .roles_list .toggable[selected=true][data-v-5d3e7a29] {\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  border: 1px #0047bb solid;\n  background-color: #0047bb;\n  color: #f0fbff;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#new_topic[data-v-5d3e7a29] {\n  display: flex;\n  flex-direction: column;\n}\n#new_topic .desc[data-v-5d3e7a29] {\n  margin: 4px;\n  font-weight: 500;\n  align-self: flex-start;\n}\n#new_topic .divider[data-v-5d3e7a29] {\n  border-top: 1px #929292 solid;\n  margin: 12px 8px;\n}\n#new_topic .input[data-v-5d3e7a29] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  text-align: start;\n  -webkit-appearance: none;\n  outline: none;\n}\n#new_topic .users_list[data-v-5d3e7a29],\n#new_topic .roles_list[data-v-5d3e7a29] {\n  display: flex;\n  flex-wrap: wrap;\n}\n#new_topic .users_list .toggable[data-v-5d3e7a29],\n#new_topic .roles_list .toggable[data-v-5d3e7a29] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  cursor: pointer;\n}\n#new_topic .users_list .toggable[selected=true][data-v-5d3e7a29],\n#new_topic .roles_list .toggable[selected=true][data-v-5d3e7a29] {\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  border: 1px #0047bb solid;\n  background-color: #0047bb;\n  color: #f0fbff;\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

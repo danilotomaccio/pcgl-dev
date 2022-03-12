@@ -32,7 +32,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       message: message,
       topics: topics,
-      selectedTopic: topics[0]
+      selectedTopic: topics[0],
+      loading: false
     };
   },
   mounted: function mounted() {
@@ -58,6 +59,9 @@ __webpack_require__.r(__webpack_exports__);
     }))();
   },
   methods: {
+    hasMandatoryFields: function hasMandatoryFields() {
+      return this.selectedTopic && this.message.title && this.message.description;
+    },
     sendPushNotification: function sendPushNotification() {
       var _this2 = this;
 
@@ -67,11 +71,12 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this2.selectedTopic && _this2.message.title && _this2.message.description)) {
-                  _context2.next = 4;
+                if (!_this2.hasMandatoryFields()) {
+                  _context2.next = 6;
                   break;
                 }
 
+                _this2.loading = true;
                 msg = {
                   topic: _this2.selectedTopic,
                   webpush: {
@@ -84,10 +89,13 @@ __webpack_require__.r(__webpack_exports__);
                     }
                   }
                 };
-                _context2.next = 4;
+                _context2.next = 5;
                 return new _services_NotificationService__WEBPACK_IMPORTED_MODULE_5__.NotificationService().sendNotification(msg);
 
-              case 4:
+              case 5:
+                _this2.loading = false;
+
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -146,6 +154,7 @@ var _hoisted_6 = {
   class: "topics_list"
 };
 var _hoisted_7 = ["selected", "onClick"];
+var _hoisted_8 = ["disabled", "loading"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -198,10 +207,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = //@ts-ignore
     function () {
       return _ctx.sendPushNotification && _ctx.sendPushNotification.apply(_ctx, arguments);
-    })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_2__.toDisplayString)(_ctx.$t.sendNotification), 1
-  /* TEXT */
-  )]);
+    }),
+    disabled: !_ctx.hasMandatoryFields(),
+    loading: _ctx.loading
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_2__.toDisplayString)(_ctx.loading ? _ctx.$t.sendingNotification : _ctx.$t.sendNotification), 9
+  /* TEXT, PROPS */
+  , _hoisted_8)]);
 }
 
 /***/ }),
@@ -223,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#notifications[data-v-beb795da] {\n  display: flex;\n  flex-direction: column;\n}\n#notifications .desc[data-v-beb795da] {\n  margin: 4px;\n  font-weight: 500;\n  align-self: flex-start;\n}\n#notifications .notification[data-v-beb795da] {\n  display: flex;\n  flex-direction: column;\n}\n#notifications .input[data-v-beb795da] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  -webkit-appearance: none;\n  outline: none;\n}\n#notifications .topics_list[data-v-beb795da] {\n  display: flex;\n  flex-wrap: wrap;\n}\n#notifications .topics_list .topic[data-v-beb795da] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  cursor: pointer;\n}\n#notifications .topics_list .topic[selected=true][data-v-beb795da] {\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  border: 1px #0047bb solid;\n  background-color: #0047bb;\n  color: #f0fbff;\n}\n#notifications .topics_list .new_topic_button[data-v-beb795da] {\n  border: 1px grey dashed;\n}\n#notifications .submit_button[data-v-beb795da] {\n  text-align: center;\n  margin: 26px auto;\n  background-color: #0047bb;\n  color: #f0fbff;\n  font-weight: 500;\n  padding: 12px 24px;\n  border-radius: 8px;\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  cursor: pointer;\n  /* &[disabled=\"true\"] {\n    pointer-events: none;\n    opacity: 0.4;\n  } */\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#notifications[data-v-beb795da] {\n  display: flex;\n  flex-direction: column;\n}\n#notifications .desc[data-v-beb795da] {\n  margin: 4px;\n  font-weight: 500;\n  align-self: flex-start;\n}\n#notifications .notification[data-v-beb795da] {\n  display: flex;\n  flex-direction: column;\n}\n#notifications .input[data-v-beb795da] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  text-align: start;\n  -webkit-appearance: none;\n  outline: none;\n}\n#notifications .topics_list[data-v-beb795da] {\n  display: flex;\n  flex-wrap: wrap;\n}\n#notifications .topics_list .topic[data-v-beb795da] {\n  border: 1px #2c3e50 solid;\n  border-radius: 8px;\n  padding: 8px;\n  margin: 6px;\n  cursor: pointer;\n}\n#notifications .topics_list .topic[selected=true][data-v-beb795da] {\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  border: 1px #0047bb solid;\n  background-color: #0047bb;\n  color: #f0fbff;\n}\n#notifications .topics_list .new_topic_button[data-v-beb795da] {\n  border: 1px grey dashed;\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

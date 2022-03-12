@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
     onTouchEnd(event) {
       this.moving = true;
-      const maxSwipe = 200;
+      const maxSwipe = 160;
 
       if (this.translate > maxSwipe) {
         this.translate = this.windowWidth + 1;
@@ -239,8 +239,9 @@ Home = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,vue_class_component
       }
 
       return `Ciao${this.displayName ? ", " + this.displayName : ""}!`;
-    }
+    },
 
+    user: () => _store__WEBPACK_IMPORTED_MODULE_4__.store.state.appState.user
   },
   methods: {
     hasPermission(permission) {
@@ -334,11 +335,11 @@ const _hoisted_4 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     class: "notification",
-    onTouchmove: _cache[0] || (_cache[0] = //@ts-ignore
+    onTouchmovePassive: _cache[0] || (_cache[0] = //@ts-ignore
     (...args) => _ctx.onTouchMove && _ctx.onTouchMove(...args)),
-    onTouchstart: _cache[1] || (_cache[1] = //@ts-ignore
+    onTouchstartPassive: _cache[1] || (_cache[1] = //@ts-ignore
     (...args) => _ctx.onTouchStart && _ctx.onTouchStart(...args)),
-    onTouchend: _cache[2] || (_cache[2] = //@ts-ignore
+    onTouchendPassive: _cache[2] || (_cache[2] = //@ts-ignore
     (...args) => _ctx.onTouchEnd && _ctx.onTouchEnd(...args)),
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
       transform: `translateX(${_ctx.translate}px)`
@@ -448,22 +449,47 @@ const _hoisted_4 = {
   class: "header"
 };
 const _hoisted_5 = {
+  key: 0,
+  class: "activities placeholder"
+};
+
+const _hoisted_6 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  class: "placeholder_card"
+}, null, -1
+/* HOISTED */
+));
+
+const _hoisted_7 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  class: "placeholder_card"
+}, null, -1
+/* HOISTED */
+));
+
+const _hoisted_8 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  class: "placeholder_card"
+}, null, -1
+/* HOISTED */
+));
+
+const _hoisted_9 = [_hoisted_6, _hoisted_7, _hoisted_8];
+const _hoisted_10 = {
+  key: 1,
   class: "activities"
 };
-const _hoisted_6 = {
+const _hoisted_11 = {
   key: 0,
   class: "car"
 };
-const _hoisted_7 = {
+const _hoisted_12 = {
   key: 1,
   class: "admin"
 };
-const _hoisted_8 = {
+const _hoisted_13 = {
   key: 2,
   class: "no_permission"
 };
 
-const _hoisted_9 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+const _hoisted_14 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   class: "icon"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   class: "material-icon"
@@ -482,13 +508,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Settings), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.headerString), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_ctx.usecar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [_ctx.usingCar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LeaveCarButton, {
+  ), !_ctx.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [_ctx.usecar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [_ctx.usingCar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LeaveCarButton, {
     key: 0
   })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_UseCarButton, {
     key: 1
-  }))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.hasPermission('admin') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AdminButton)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.hasPermission('admin') && !_ctx.usecar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.noPermission), 1
+  }))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.hasPermission('admin') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AdminButton)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.user && !_ctx.hasPermission('admin') && !_ctx.usecar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.noPermission), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  <div class=\"other\">\n          Per il momento è tutto ma se lavorerai sodo e farai tutto quello che\n          ti viene detto senza fare domande un giorno anche tu potrai fare altre\n          cose oltre a quelle sopra elencate\n        </div> ")])])]);
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  <div class=\"other\">\n          Per il momento è tutto ma se lavorerai sodo e farai tutto quello che\n          ti viene detto senza fare domande un giorno anche tu potrai fare altre\n          cose oltre a quelle sopra elencate\n        </div> ")]))])]);
 }
 
 /***/ }),
@@ -1218,6 +1244,7 @@ const strings = {
   notificationDesc: "Invia una notifica ad un gruppo di iscritti",
   goToAdminPush: "Invia notifica",
   sendNotification: "Invia",
+  sendingNotification: "Inviando...",
   title: "Titolo",
   description: "Description",
   users: "Utenti",
@@ -1532,7 +1559,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  margin: 0;\n  padding: 0;\n}\n#app {\n  font-family: Avenir, Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.5s ease;\n}\n.fade-enter-from,\n.fade-leave-to {\n  opacity: 0;\n}\n.expand-card-enter-active,\n.expand-card-leave-active {\n  transition: opacity 0.4s cubic-bezier(0.94, 0.01, 1, 1);\n}\n.expand-card-enter-from,\n.expand-card-leave-to {\n  opacity: 0;\n}\n.material-icon {\n  font-family: \"Material Icons Round\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  font-feature-settings: \"liga\";\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  margin: 0;\n  padding: 0;\n}\n#app {\n  font-family: Avenir, Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.5s ease;\n}\n.fade-enter-from,\n.fade-leave-to {\n  opacity: 0;\n}\n.expand-card-enter-active,\n.expand-card-leave-active {\n  transition: opacity 0.4s cubic-bezier(0.94, 0.01, 1, 1);\n}\n.expand-card-enter-from,\n.expand-card-leave-to {\n  opacity: 0;\n}\n.material-icon {\n  font-family: \"Material Icons Round\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  font-feature-settings: \"liga\";\n}\n.submit_button {\n  text-align: center;\n  margin: 26px auto;\n  min-width: 200px;\n  background-color: #0047bb;\n  color: #f0fbff;\n  font-weight: 500;\n  padding: 12px 24px;\n  border-radius: 8px;\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  cursor: pointer;\n}\n.submit_button[disabled=true] {\n  pointer-events: none;\n  opacity: 0.4;\n}\n.submit_button[loading=true] {\n  color: #2c3e50;\n  border: 1px #0047bb solid;\n  border-radius: 4px;\n  position: relative;\n  background: linear-gradient(45deg, transparent 49%, #0047bb 50%, #0047bb 50%, transparent 51%, transparent), linear-gradient(-45deg, transparent 49%, #0047bb 50%, #0047bb 50%, transparent 51%, transparent);\n  background-size: 16px 16px;\n  background-position: 0% 0%;\n  -webkit-animation: spTexture 1s infinite linear;\n  animation: spTexture 1s infinite linear;\n}\n@-webkit-keyframes spTexture {\nfrom {\n    background-position: 0px 0px;\n}\nto {\n    background-position: -16px 0px;\n}\n}\n@keyframes spTexture {\nfrom {\n    background-position: 0px 0px;\n}\nto {\n    background-position: -16px 0px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -1700,7 +1727,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* #home {\n  height: 100%;\n} */\n.foreground[data-v-fae5bece] {\n  z-index: 10;\n  padding: 40px;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  /* .other {\n    margin-top: 20px;\n    color: rgb(161, 161, 161);\n    border: 2px rgb(161, 161, 161) dashed;\n    padding: 12px;\n    border-radius: 8px;\n  } */\n}\n.foreground .activities[data-v-fae5bece] {\n  width: 100%;\n  flex: 1;\n}\n.foreground .activities > *[data-v-fae5bece] {\n  margin: 12px 0;\n}\n.foreground .no_permission[data-v-fae5bece] {\n  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);\n  z-index: 6;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n}\n.icon span[data-v-fae5bece] {\n  color: #2c3e50;\n  font-size: 56px;\n}\n.header[data-v-fae5bece] {\n  padding: 40px 0;\n  color: #2c3e50;\n  font-size: 26px;\n  font-weight: 600;\n}\n.background[data-v-fae5bece] {\n  z-index: -10;\n  height: 100%;\n  width: 100%;\n  position: fixed;\n  left: 0;\n  top: 0;\n  display: flex;\n  flex-direction: column;\n}\n.background .header[data-v-fae5bece] {\n  background-color: #eedc00;\n  flex-basis: 140px;\n}\n@media screen and (max-width: 600px) {\n.foreground[data-v-fae5bece] {\n    padding: 40px 24px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* #home {\n  height: 100%;\n} */\n.foreground[data-v-fae5bece] {\n  z-index: 10;\n  padding: 40px;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  /* .other {\n    margin-top: 20px;\n    color: rgb(161, 161, 161);\n    border: 2px rgb(161, 161, 161) dashed;\n    padding: 12px;\n    border-radius: 8px;\n  } */\n}\n.foreground .activities[data-v-fae5bece] {\n  width: 100%;\n  flex: 1;\n}\n.foreground .activities > *[data-v-fae5bece] {\n  margin: 12px 0;\n}\n.foreground .placeholder .placeholder_card[data-v-fae5bece] {\n  height: 110px;\n  box-shadow: none;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n  background-color: #f0f0f0;\n  opacity: 0.2;\n  -webkit-animation: 1s ease-out infinite alternate slidein-fae5bece;\n          animation: 1s ease-out infinite alternate slidein-fae5bece;\n}\n@-webkit-keyframes slidein-fae5bece {\n  /* from {\n    opacity: 0;\n  } */\nto {\n    opacity: 1;\n}\n}\n@keyframes slidein-fae5bece {\n  /* from {\n    opacity: 0;\n  } */\nto {\n    opacity: 1;\n}\n}\n.foreground .no_permission[data-v-fae5bece] {\n  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);\n  z-index: 6;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n}\n.icon span[data-v-fae5bece] {\n  color: #2c3e50;\n  font-size: 56px;\n}\n.header[data-v-fae5bece] {\n  padding: 40px 0;\n  color: #2c3e50;\n  font-size: 26px;\n  font-weight: 600;\n}\n.background[data-v-fae5bece] {\n  z-index: -10;\n  height: 100%;\n  width: 100%;\n  position: fixed;\n  left: 0;\n  top: 0;\n  display: flex;\n  flex-direction: column;\n}\n.background .header[data-v-fae5bece] {\n  background-color: #eedc00;\n  flex-basis: 140px;\n}\n@media screen and (max-width: 600px) {\n.foreground[data-v-fae5bece] {\n    padding: 40px 24px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

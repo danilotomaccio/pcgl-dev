@@ -208,7 +208,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#admin_home[data-v-3d9045f8] {\n  padding: 24px;\n}\n#admin_home .section[data-v-3d9045f8] {\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 12px;\n}\n#admin_home .section .description[data-v-3d9045f8] {\n  padding: 6px;\n}\n#admin_home .button[data-v-3d9045f8] {\n  padding: 8px 18px;\n  cursor: pointer;\n  background-color: #0047bb;\n  color: #f0fbff;\n  border-radius: 8px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#admin_home .section[data-v-3d9045f8] {\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  z-index: 2;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 12px;\n}\n#admin_home .section .description[data-v-3d9045f8] {\n  padding: 6px;\n}\n#admin_home .button[data-v-3d9045f8] {\n  padding: 8px 18px;\n  cursor: pointer;\n  background-color: #0047bb;\n  color: #f0fbff;\n  border-radius: 8px;\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
