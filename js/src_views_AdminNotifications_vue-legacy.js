@@ -80,11 +80,7 @@ __webpack_require__.r(__webpack_exports__);
                       body: _this2.message.description,
                       icon: "https://app.protezioneciviletricarico.com/img/icons/android-chrome-192x192.png",
                       color: "#7e55c3",
-                      badge: "https://app.protezioneciviletricarico.com/img/icons/android-chrome-192x192.png",
-                      actions: [{
-                        action: "goTo",
-                        title: "Prova"
-                      }]
+                      badge: "https://app.protezioneciviletricarico.com/img/icons/android-chrome-192x192.png"
                     }
                   }
                 };

@@ -28,7 +28,15 @@ __webpack_require__.r(__webpack_exports__);
     Notification: _components_Notification_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
-    var message = null;
+    var message = {
+      from: "712755300293",
+      messageId: "c8c49a3d-d48e-405c-8410-8f0f073085c9",
+      notification: {
+        title: "asdasd",
+        body: "dsadsa"
+      }
+    }; //let message: MessagePayload | any = null;
+
     return {
       message: message
     };
@@ -81,17 +89,44 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
-  data: function data() {
-    return {
-      dismiss: false
-    };
-  },
   mounted: function mounted() {
     var _this = this;
 
-    setTimeout(function () {
-      _this.dismiss = true;
-    }, 10000);
+    if (window) {
+      this.windowWidth = window.innerWidth;
+      window.addEventListener("resize", function (event) {
+        return _this.windowWidth = window.innerWidth;
+      });
+    }
+  },
+  data: function data() {
+    return {
+      touchStartPoint: [0, 0],
+      translate: 0,
+      moving: false,
+      windowWidth: 0
+    };
+  },
+  methods: {
+    onTouchMove: function onTouchMove(event) {
+      this.translate = event.changedTouches[0].screenX - this.touchStartPoint[0];
+    },
+    onTouchStart: function onTouchStart(event) {
+      this.moving = false;
+      this.touchStartPoint = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
+    },
+    onTouchEnd: function onTouchEnd(event) {
+      this.moving = true;
+      var maxSwipe = 200;
+
+      if (this.translate > maxSwipe) {
+        this.translate = this.windowWidth + 1;
+      } else if (this.translate < -maxSwipe) {
+        this.translate = -(this.windowWidth + 1);
+      } else {
+        this.translate = 0;
+      }
+    }
   }
 }));
 
@@ -316,20 +351,39 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   id: "notification"
 };
-var _hoisted_2 = {
+var _hoisted_2 = ["moving"];
+var _hoisted_3 = {
   class: "title"
 };
-var _hoisted_3 = {
+var _hoisted_4 = {
   class: "body"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message.notification.title), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    class: "notification",
+    onTouchmove: _cache[0] || (_cache[0] = //@ts-ignore
+    function () {
+      return _ctx.onTouchMove && _ctx.onTouchMove.apply(_ctx, arguments);
+    }),
+    onTouchstart: _cache[1] || (_cache[1] = //@ts-ignore
+    function () {
+      return _ctx.onTouchStart && _ctx.onTouchStart.apply(_ctx, arguments);
+    }),
+    onTouchend: _cache[2] || (_cache[2] = //@ts-ignore
+    function () {
+      return _ctx.onTouchEnd && _ctx.onTouchEnd.apply(_ctx, arguments);
+    }),
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
+      transform: "translateX(".concat(_ctx.translate, "px)")
+    }),
+    moving: _ctx.moving
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message.notification.title), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message.notification.body), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message.notification.body), 1
   /* TEXT */
-  )], 512
-  /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.dismiss]]);
+  )], 44
+  /* STYLE, PROPS, HYDRATE_EVENTS */
+  , _hoisted_2)]);
 }
 
 /***/ }),
@@ -1998,7 +2052,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#notification[data-v-9084a0ca] {\n  position: absolute;\n  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n  z-index: 4;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n  margin: 4px;\n  top: 0;\n  left: 0;\n  right: 0;\n  text-align: start;\n}\n#notification .title[data-v-9084a0ca] {\n  font-weight: 700;\n}\n#notification .body[data-v-9084a0ca] {\n  font-weight: 400;\n}\n@media screen and (min-width: 600px) {\n#notification[data-v-9084a0ca] {\n    bottom: 0;\n    top: auto;\n    right: auto;\n    margin: 24px;\n    background-color: #0047bb;\n    color: #f0fbff;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#notification[data-v-9084a0ca] {\n  overflow-x: clip;\n  position: relative;\n}\n.notification[data-v-9084a0ca] {\n  position: absolute;\n  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n  z-index: 4;\n  border-radius: 8px;\n  padding: 14px;\n  max-width: 100%;\n  background-color: white;\n  color: #2c3e50;\n  margin: 4px;\n  top: 0;\n  left: 0;\n  right: 0;\n  text-align: start;\n}\n.notification[moving=true][data-v-9084a0ca] {\n  transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);\n}\n.notification .title[data-v-9084a0ca] {\n  font-weight: 700;\n}\n.notification .body[data-v-9084a0ca] {\n  font-weight: 400;\n}\n@media screen and (min-width: 600px) {\n.notification[data-v-9084a0ca] {\n    left: auto;\n    margin: 24px;\n    padding: 14px 32px;\n    /* background-color: $secondary;\n    color: $textColorWhite; */\n}\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
