@@ -1726,6 +1726,7 @@ var strings = {
   loginWithGoogle: "Accedi con Google",
   logout: "Effettua logout",
   install: "Installa app",
+  update: "Aggiorna app",
   notificationDesc: "Invia una notifica ad un gruppo di iscritti",
   goToAdminPush: "Invia notifica",
   sendNotification: "Invia",
