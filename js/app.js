@@ -167,12 +167,22 @@ __webpack_require__.r(__webpack_exports__);
       if (this.installEv) {
         this.installEv.prompt();
       }
+    },
+
+    updateApp() {
+      if (this.updateAvailable) {
+        window.location.reload();
+      }
     }
 
   },
   computed: {
     installEv() {
       return this.$store.state.appState.installEvent;
+    },
+
+    updateAvailable() {
+      return this.$store.state.appState.updateAvailable;
     }
 
   }
@@ -375,19 +385,20 @@ const _withScopeId = n => ((0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("dat
 const _hoisted_1 = {
   id: "more_menu"
 };
+const _hoisted_2 = ["badge"];
 
-const _hoisted_2 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+const _hoisted_3 = /*#__PURE__*/_withScopeId(() => /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   class: "material-icon"
 }, "more_vert", -1
 /* HOISTED */
 ));
 
-const _hoisted_3 = [_hoisted_2];
-const _hoisted_4 = {
+const _hoisted_4 = [_hoisted_3];
+const _hoisted_5 = {
   key: 0,
   id: "menu"
 };
-const _hoisted_5 = {
+const _hoisted_6 = {
   class: "text"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -395,19 +406,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: "menu_btn",
-    onClick: _cache[0] || (_cache[0] = $event => _ctx.showMenu = !_ctx.showMenu)
-  }, _hoisted_3), _ctx.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [_ctx.installEv ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    onClick: _cache[0] || (_cache[0] = $event => _ctx.showMenu = !_ctx.showMenu),
+    badge: _ctx.updateAvailable
+  }, _hoisted_4, 8
+  /* PROPS */
+  , _hoisted_2), _ctx.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [_ctx.installEv ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
     class: "option",
     onClick: _cache[1] || (_cache[1] = //@ts-ignore
     (...args) => _ctx.installApp && _ctx.installApp(...args))
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.install), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.updateAvailable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 1,
     class: "option",
     onClick: _cache[2] || (_cache[2] = //@ts-ignore
+    (...args) => _ctx.updateApp && _ctx.updateApp(...args))
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.update), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    class: "option",
+    onClick: _cache[3] || (_cache[3] = //@ts-ignore
     (...args) => _ctx.logout && _ctx.logout(...args))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.logout), 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t.logout), 1
   /* TEXT */
   )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])), [[_directive_click_outside, _ctx.onClickOutside]]);
 }
@@ -628,11 +649,15 @@ app.mount('#app');
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var register_service_worker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! register-service-worker */ "./node_modules/register-service-worker/index.js");
+/* harmony import */ var register_service_worker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! register-service-worker */ "./node_modules/register-service-worker/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./src/store/index.ts");
+/* harmony import */ var _store_modules_appState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/modules/appState */ "./src/store/modules/appState.ts");
 /* eslint-disable no-console */
+
+
  // if (process.env.NODE_ENV === 'production') {
 
-(0,register_service_worker__WEBPACK_IMPORTED_MODULE_0__.register)(`${"/"}service-worker.js`, {
+(0,register_service_worker__WEBPACK_IMPORTED_MODULE_2__.register)(`${"/"}service-worker.js`, {
   ready() {
     console.log('App is being served from cache by a service worker.\n' + 'For more details, visit https://goo.gl/AFskqB');
   },
@@ -651,6 +676,7 @@ __webpack_require__.r(__webpack_exports__);
 
   updated() {
     console.log('New content is available; please refresh.');
+    _store__WEBPACK_IMPORTED_MODULE_0__.store.commit(_store_modules_appState__WEBPACK_IMPORTED_MODULE_1__.SET_UPDATE_AVAILABLE);
   },
 
   offline() {
@@ -968,6 +994,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LISTEN_CARS": function() { return /* binding */ LISTEN_CARS; },
 /* harmony export */   "LISTEN_USER": function() { return /* binding */ LISTEN_USER; },
 /* harmony export */   "SET_INSTALL_EVENT": function() { return /* binding */ SET_INSTALL_EVENT; },
+/* harmony export */   "SET_UPDATE_AVAILABLE": function() { return /* binding */ SET_UPDATE_AVAILABLE; },
 /* harmony export */   "appStateModule": function() { return /* binding */ appStateModule; }
 /* harmony export */ });
 /* harmony import */ var _services_FirebaseDBService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/FirebaseDBService */ "./src/services/FirebaseDBService.ts");
@@ -981,7 +1008,8 @@ const appStateModule = {
   state: {
     cars: null,
     user: null,
-    installEvent: null
+    installEvent: null,
+    updateAvailable: false
   },
   mutations: {
     updateCars(state, cars) {
@@ -995,6 +1023,10 @@ const appStateModule = {
 
     setInstallEvent(state, installEvent) {
       state.installEvent = installEvent;
+    },
+
+    setUpdateAvailable(state, updateAvailable = true) {
+      state.updateAvailable = updateAvailable;
     }
 
   },
@@ -1070,7 +1102,8 @@ const appStateModule = {
 };
 const LISTEN_CARS = 'listenCars',
       LISTEN_USER = 'listenUser',
-      SET_INSTALL_EVENT = 'setInstallEvent';
+      SET_INSTALL_EVENT = 'setInstallEvent',
+      SET_UPDATE_AVAILABLE = 'setUpdateAvailable';
 
 /***/ }),
 
@@ -1701,7 +1734,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#more_menu[data-v-47aa12d3] {\n  margin: 16px;\n}\n#more_menu #menu_btn[data-v-47aa12d3] {\n  position: absolute;\n  right: 12px;\n  height: 24px;\n}\n#more_menu #menu[data-v-47aa12d3] {\n  position: absolute;\n  right: 12px;\n  margin-left: 12px;\n  background-color: white;\n  color: #1d1d1d;\n  width: auto;\n  min-width: 260px;\n  border-radius: 16px;\n  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);\n  z-index: 10;\n}\n#more_menu #menu .option[data-v-47aa12d3] {\n  padding: 14px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n#more_menu #menu input[type=number][data-v-47aa12d3] {\n  -webkit-appearance: none;\n  font-family: inherit;\n  width: 20%;\n  outline: none;\n  border: none;\n  border-radius: 6px;\n  padding: 6px;\n}\n.switch[data-v-47aa12d3] {\n  position: relative;\n  display: inline-block;\n  width: 30px;\n  height: 18px;\n  margin: 12px;\n}\n.switch input[data-v-47aa12d3] {\n  opacity: 0;\n  width: 0;\n  height: 0;\n}\n.switch .slider[data-v-47aa12d3] {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #9c9100;\n  transition: 0.4s;\n  border-radius: 2em;\n  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);\n  z-index: 1;\n}\n.switch .slider[data-v-47aa12d3]:before {\n  position: absolute;\n  content: \"\";\n  height: 14px;\n  width: 14px;\n  left: 2px;\n  bottom: 2px;\n  background-color: #2c3e50;\n  transition: 0.4s;\n  border-radius: 50%;\n}\n.switch input:checked + .slider[data-v-47aa12d3] {\n  background-color: #eedc00;\n}\n.switch input:focus + .slider[data-v-47aa12d3] {\n  box-shadow: 0 0 1px #eedc00;\n}\n.switch input:checked + .slider[data-v-47aa12d3]:before {\n  transform: translateX(12px);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#more_menu[data-v-47aa12d3] {\n  margin: 16px;\n}\n#more_menu #menu_btn[data-v-47aa12d3] {\n  position: absolute;\n  right: 12px;\n  height: 24px;\n}\n#more_menu #menu_btn[badge=true][data-v-47aa12d3]::after {\n  content: \"\";\n  background-color: #ff3c00;\n  width: 8px;\n  height: 8px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  border-radius: 50%;\n}\n#more_menu #menu[data-v-47aa12d3] {\n  position: absolute;\n  right: 12px;\n  margin-left: 12px;\n  background-color: white;\n  color: #1d1d1d;\n  width: auto;\n  min-width: 260px;\n  border-radius: 16px;\n  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);\n  z-index: 10;\n}\n#more_menu #menu .option[data-v-47aa12d3] {\n  padding: 14px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n#more_menu #menu input[type=number][data-v-47aa12d3] {\n  -webkit-appearance: none;\n  font-family: inherit;\n  width: 20%;\n  outline: none;\n  border: none;\n  border-radius: 6px;\n  padding: 6px;\n}\n.switch[data-v-47aa12d3] {\n  position: relative;\n  display: inline-block;\n  width: 30px;\n  height: 18px;\n  margin: 12px;\n}\n.switch input[data-v-47aa12d3] {\n  opacity: 0;\n  width: 0;\n  height: 0;\n}\n.switch .slider[data-v-47aa12d3] {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #9c9100;\n  transition: 0.4s;\n  border-radius: 2em;\n  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);\n  z-index: 1;\n}\n.switch .slider[data-v-47aa12d3]:before {\n  position: absolute;\n  content: \"\";\n  height: 14px;\n  width: 14px;\n  left: 2px;\n  bottom: 2px;\n  background-color: #2c3e50;\n  transition: 0.4s;\n  border-radius: 50%;\n}\n.switch input:checked + .slider[data-v-47aa12d3] {\n  background-color: #eedc00;\n}\n.switch input:focus + .slider[data-v-47aa12d3] {\n  box-shadow: 0 0 1px #eedc00;\n}\n.switch input:checked + .slider[data-v-47aa12d3]:before {\n  transform: translateX(12px);\n}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
